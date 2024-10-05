@@ -22,24 +22,31 @@ if (!defined('ABSPATH')) {
 }
 
 //plugin Versions
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'DYNAMIC_PLUGIN_VERSION', '1.0.2' );
 
 
 // Include other plugin components
-define( 'MY_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'DYNAMIC_PLUGIN', plugin_dir_path( __FILE__ ) );
 
-include_once( MY_PLUGIN_PATH . 'includes/admin/admin.php');
+include_once( DYNAMIC_PLUGIN . 'includes/admin/admin.php');
+include_once( DYNAMIC_PLUGIN . 'shortcoes/shortcode.php');
 
-//For admin panel and front-end bootstrap
-wp_register_script('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js');
-wp_enqueue_script('prefix_bootstrap');
+//For admin panel 
+function bootstrap_js(){
+    wp_enqueue_script('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
+    wp_enqueue_style('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+}
+add_action( 'admin_enqueue_scripts', 'bootstrap_js');
 
-wp_register_style('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
-wp_enqueue_style('prefix_bootstrap');
+//Front-end bootstrap
+function bootstrap_js_front(){
+    wp_enqueue_script('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
+    wp_enqueue_style('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+}
+add_action( 'wp_enqueue_scripts', 'bootstrap_js_front');
 
 //add js 
-
-add_action( 'admin_enqueue_scripts', 'add_js_scripts' );
 function add_js_scripts(){
-    wp_enqueue_script( 'ajaxcalls', plugins_url( 'includes/admin/main.js', __FILE__ ));
+    wp_enqueue_script( 'jscall', plugins_url( 'includes/admin/main.js', __FILE__ ));
 }
+add_action( 'admin_enqueue_scripts', 'add_js_scripts' );
