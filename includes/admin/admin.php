@@ -31,7 +31,7 @@ function dynamic_menu_fields(){
 add_action('admin_init', 'dynamic_form_register_settings');
 
 function dynamic_form_register_settings(){
-    register_settings(
+    register_setting(
         'dynamic-form-group', 'form_fields'
     );
 

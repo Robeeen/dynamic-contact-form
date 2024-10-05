@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
 }
 
 //plugin Versions
-defined( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'PLUGIN_NAME_VERSION', '1.0.0' );
 
 
 // Include other plugin components
