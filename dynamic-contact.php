@@ -2,8 +2,8 @@
 
 
  /*
- * Plugin Name: Dasborad Plugin
- * Description: A plugin to create custom dashboards for users with registration, form input, and table display.
+ * Plugin Name: Dynamic Form Fields
+ * Description: A plugin to create form fields dynamically.
  * Version: 1.0.0
  * Requires at least: 5.0
  * Requires PHP: 7.0
@@ -23,3 +23,9 @@ if (!defined('ABSPATH')) {
 
 //plugin Versions
 defined( 'PLUGIN_NAME_VERSION', '1.0.0' );
+
+
+// Include other plugin components
+define( 'MY_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+
+include_once( MY_PLUGIN_PATH . 'includes/admin/admin.php');
