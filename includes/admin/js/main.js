@@ -1,6 +1,3 @@
-console.log("hi");
-
-
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('add-new-field').addEventListener('click', function (e) {
         e.preventDefault();

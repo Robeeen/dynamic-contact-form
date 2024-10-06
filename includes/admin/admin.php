@@ -87,10 +87,14 @@ function dff_field_list_callback() {
         </tbody>
     </table>
     <button id="add-new-field" class="btn btn-success">Add New Field</button>
- 
+
+    <script>
+       //Moved to Main.js
+    </script>
     <?php
 }
 
+//removing shortcode from here -> goes to shortcode.php
 
 function dff_handle_form_submission() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -98,12 +102,28 @@ function dff_handle_form_submission() {
         $table_name = $wpdb->prefix . 'dynamic_form_submissions';  // Reference the custom table
 
         $fields = get_option('dff_fields', []);
+        if(!is_array($fields)){
+            $fields = [];
+        }
         foreach ($fields as $field) {
             if (isset($_POST[$field['name']])) {
-                $value = sanitize_text_field($_POST[$field['name']]);
+                $value = $_POST[$field['name']];
+                
+                if ($field['type'] === 'email') {
+                    // Sanitize email field
+                    $value = sanitize_email($value);  
+                } elseif ($field['type'] === 'select') {
+                    // Sanitize dropdown (select) field
+                    $value = sanitize_text_field($value);
+                } else {
+                    // Sanitize all other fields as text
+                    $value = sanitize_text_field($value);
+                }
+
+                
 
                 // Insert each field value into the custom table
-                $wpdb->insert(
+               $result = $wpdb->insert(
                     $table_name,
                     array(
                         'field_name'   => $field['name'],
@@ -115,10 +135,10 @@ function dff_handle_form_submission() {
                         '%s',   // field_value data type
                         '%s'    // submission_date data type
                     )
-                );
-
-                
+                );                
             }
         }
-    }
+    }    
 }
+
+//var_dump($_POST);

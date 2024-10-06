@@ -5,6 +5,9 @@ add_shortcode('dynamic_form', 'dff_display_form');
 
 function dff_display_form() {
     $fields = get_option('dff_fields', []);
+    if(!is_array($fields)){
+        $fields = [];
+    }
     ob_start();
     ?>
     <form action="" method="post">
@@ -45,7 +48,7 @@ function dff_display_form() {
                 <?php endif; ?>
             </p>
         <?php endforeach; ?>
-        <p><input type="submit" value="Submit" class="btn btn-primary"></p>
+        <p><input type="submit" value="Submit" class="btn btn-primary">  <input type="reset" value="reset" class="btn btn-primary"></p>
     </form>
     <?php
     return ob_get_clean();
