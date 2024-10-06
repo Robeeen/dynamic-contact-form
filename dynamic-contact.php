@@ -29,7 +29,7 @@ define( 'DYNAMIC_PLUGIN_VERSION', '1.0.2' );
 define( 'DYNAMIC_PLUGIN', plugin_dir_path( __FILE__ ) );
 
 include_once( DYNAMIC_PLUGIN . 'includes/admin/admin.php');
-include_once( DYNAMIC_PLUGIN . 'shortcoes/shortcode.php');
+include_once( DYNAMIC_PLUGIN . 'shortcodes/shortcode.php');
 
 //For admin panel 
 function bootstrap_js(){
@@ -47,7 +47,7 @@ add_action( 'wp_enqueue_scripts', 'bootstrap_js_front');
 
 //add js 
 function add_js_scripts(){
-    wp_enqueue_script( 'jscall', plugins_url( 'includes/admin/main.js', __FILE__ ));
+    wp_enqueue_script( 'jscall', plugins_url( 'includes/admin/js/main.js', __FILE__ ));
     wp_enqueue_style('csscall', plugins_url( 'includes/admin/css/style.css', __FILE__));
 }
 add_action( 'admin_enqueue_scripts', 'add_js_scripts' );
