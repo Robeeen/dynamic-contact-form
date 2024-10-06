@@ -50,3 +50,26 @@ function add_js_scripts(){
     wp_enqueue_script( 'jscall', plugins_url( 'includes/admin/main.js', __FILE__ ));
 }
 add_action( 'admin_enqueue_scripts', 'add_js_scripts' );
+
+
+//Create a table for storing data from front-end Contact Form.
+register_activation_hook(__FILE__, 'dff_create_custom_table');
+
+function dff_create_custom_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'dynamic_form_submissions'; // Table name with WordPress prefix
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id mediumint(9) NOT NULL AUTO_INCREMENT,
+        field_name varchar(255) NOT NULL,
+        field_value text NOT NULL,
+        submission_date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);  // Creates or updates the table structure
+}
+
+
