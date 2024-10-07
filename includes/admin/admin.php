@@ -58,11 +58,11 @@ function dff_field_list_callback() {
             <tr>
                 <th>Field Name</th>
                 <th>Field Type</th>
-                <th>Options (for Radio/Select)</th>
+                <th>Options (for Radio/Select/Checkbox)</th>
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="wraps">
             <?php if (!empty($fields)): ?>
                 <?php foreach ($fields as $index => $field): ?>
                     <tr>
@@ -90,6 +90,10 @@ function dff_field_list_callback() {
 
     <script>
        //Moved to Main.js
+       const dragarea = document.querySelector(".wraps");
+       new Sortable(dragarea, {
+        animation: 350
+       });
     </script>
     <?php
 }

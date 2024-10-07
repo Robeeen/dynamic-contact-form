@@ -34,6 +34,8 @@ include_once( DYNAMIC_PLUGIN . 'includes/admin/handle_form_submission.php');
 //Botstrap path declare
 define( 'path_js', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
 define( 'path_css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+define( 'sortable', '//cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.3/Sortable.min.js');
+
 
 //For admin panel 
 function bootstrap_js(){
@@ -53,6 +55,7 @@ add_action( 'wp_enqueue_scripts', 'bootstrap_js_front');
 function add_js_scripts(){
     wp_enqueue_script( 'jscall', plugins_url( 'includes/admin/js/main.js', __FILE__ ));
     wp_enqueue_style('csscall', plugins_url( 'includes/admin/css/style.css', __FILE__));
+    wp_enqueue_script( 'sortable', sortable);
 }
 add_action( 'admin_enqueue_scripts', 'add_js_scripts' );
 
@@ -83,11 +86,11 @@ register_deactivation_hook( __FILE__, 'dff_remove_custom_table');
 function dff_remove_custom_table(){
     global $wpdb;
     $table_name = $wpdb->prefix . 'dynamic_form_submissions'; // Table name with WordPress prefix
-    $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "DROP TABLE IF EXISTS $table_name"; //delete tables from the db .
     $wpdb->query($sql);
     delete_option('dff_fields'); // remove all fields that saved previously.
-
+    $admin_email = get_option('admin_email');
+    wp_mail($admin_email, 'Plugin Deactivated', 'A plugin has been deactivated on your site.');
 }
 
