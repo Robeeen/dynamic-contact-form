@@ -19,9 +19,9 @@ function dff_settings_page() {
         <h1>Dynamic Form Fields</h1>
         <form method="post" action="options.php">
             <?php
-            settings_fields('dff_settings_group');
-            do_settings_sections('dynamic-form-fields');
-            submit_button();
+                settings_fields('dff_settings_group');
+                do_settings_sections('dynamic-form-fields');
+                submit_button();
             ?>
         </form>
     </div>
@@ -95,50 +95,3 @@ function dff_field_list_callback() {
 }
 
 //removing shortcode from here -> goes to shortcode.php
-
-function dff_handle_form_submission() {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'dynamic_form_submissions';  // Reference the custom table
-
-        $fields = get_option('dff_fields', []);
-        if(!is_array($fields)){
-            $fields = [];
-        }
-        foreach ($fields as $field) {
-            if (isset($_POST[$field['name']])) {
-                $value = $_POST[$field['name']];
-                
-                if ($field['type'] === 'email') {
-                    // Sanitize email field
-                    $value = sanitize_email($value);  
-                } elseif ($field['type'] === 'select') {
-                    // Sanitize dropdown (select) field
-                    $value = sanitize_text_field($value);
-                } else {
-                    // Sanitize all other fields as text
-                    $value = sanitize_text_field($value);
-                }
-
-                
-
-                // Insert each field value into the custom table
-               $result = $wpdb->insert(
-                    $table_name,
-                    array(
-                        'field_name'   => $field['name'],
-                        'field_value'  => $value,
-                        'submission_date' => current_time('mysql'),
-                    ),
-                    array(
-                        '%s',   // field_name data type
-                        '%s',   // field_value data type
-                        '%s'    // submission_date data type
-                    )
-                );                
-            }
-        }
-    }    
-}
-
-//var_dump($_POST);

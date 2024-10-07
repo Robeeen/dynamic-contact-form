@@ -1,11 +1,10 @@
 <?php
 
-
  /*
  * Plugin Name: Dynamic Form Fields
  * Description: A plugin to create form fields dynamically.
  * Version: 1.0.0
- * Requires at least: 5.0
+ * Requires at least: 6.0
  * Requires PHP: 7.0
  * Author: Shams Khan
  * Author URI: https://shamskhan.com
@@ -30,22 +29,27 @@ define( 'DYNAMIC_PLUGIN', plugin_dir_path( __FILE__ ) );
 
 include_once( DYNAMIC_PLUGIN . 'includes/admin/admin.php');
 include_once( DYNAMIC_PLUGIN . 'shortcodes/shortcode.php');
+include_once( DYNAMIC_PLUGIN . 'includes/admin/handle_form_submission.php');
+
+//Botstrap path declare
+define( 'path_js', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
+define( 'path_css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 
 //For admin panel 
 function bootstrap_js(){
-    wp_enqueue_script('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
-    wp_enqueue_style('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+    wp_enqueue_script('prefix_bootstrap', path_js);
+    wp_enqueue_style('prefix_bootstrap', path_css);
 }
 add_action( 'admin_enqueue_scripts', 'bootstrap_js');
 
 //Front-end bootstrap
 function bootstrap_js_front(){
-    wp_enqueue_script('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
-    wp_enqueue_style('prefix_bootstrap', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
+    wp_enqueue_script('prefix_bootstrap', path_js);
+    wp_enqueue_style('prefix_bootstrap', path_css);
 }
 add_action( 'wp_enqueue_scripts', 'bootstrap_js_front');
 
-//add js 
+//add js & CSS file for admin
 function add_js_scripts(){
     wp_enqueue_script( 'jscall', plugins_url( 'includes/admin/js/main.js', __FILE__ ));
     wp_enqueue_style('csscall', plugins_url( 'includes/admin/css/style.css', __FILE__));
@@ -73,4 +77,16 @@ function dff_create_custom_table() {
     dbDelta($sql);  // Creates or updates the table structure
 }
 
+//Deactivation Hook.
+register_deactivation_hook( __FILE__, 'dff_remove_custom_table');
+
+function dff_remove_custom_table(){
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'dynamic_form_submissions'; // Table name with WordPress prefix
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "DROP TABLE IF EXISTS $table_name";
+    $wpdb->query($sql);
+    delete_option("dynamic-form-fields");
+}
 

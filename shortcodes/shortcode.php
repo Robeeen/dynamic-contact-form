@@ -4,13 +4,14 @@
 add_shortcode('dynamic_form', 'dff_display_form');
 
 function dff_display_form() {
+
     $fields = get_option('dff_fields', []);
     if(!is_array($fields)){
         $fields = [];
     }
     ob_start();
     ?>
-    <form action="" method="post">
+    <form action="" method="POST">
         <?php foreach ($fields as $field): ?>
             <p>
                 <label><?php echo esc_html($field['name']); ?></label>
@@ -32,7 +33,7 @@ function dff_display_form() {
                     $options = explode(',', $field['options']);
                     foreach ($options as $option) : ?>
                         <div class="form-check"><label>
-                            <input type="checkbox" name="<?php echo esc_attr($field['name']) ;?>" value="<?php echo esc_attr(trim($option));?>" class="form-check-input"/>
+                            <input type="checkbox" name="<?php echo esc_attr($field['name']) ;?>[]" value="<?php echo esc_attr(trim($option));?>" class="form-check-input"/>
                             <?php echo esc_html(trim($option)); ?>
                     </label></div>
                    <?php endforeach; ?>
@@ -50,7 +51,8 @@ function dff_display_form() {
         <?php endforeach; ?>
         <p><input type="submit" value="Submit" class="btn btn-primary">  <input type="reset" value="reset" class="btn btn-primary"></p>
     </form>
-    <?php
+    
+    <?php   
     return ob_get_clean();
 }
 
