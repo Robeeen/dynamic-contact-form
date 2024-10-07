@@ -80,7 +80,7 @@ function dff_field_list_callback() {
                         <td>
                             <input type="text" class="form-control" name="dff_fields[<?php echo $index; ?>][options]" value="<?php echo isset($field['options']) ? esc_attr($field['options']) : ''; ?>" placeholder="Comma separated options" />
                         </td>
-                        <td><button class="remove-field btn btn-primary">Remove</button></td>
+                        <td><button class="remove-field btn btn-danger">Remove</button></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -89,7 +89,6 @@ function dff_field_list_callback() {
     <button id="add-new-field" class="btn btn-success">Add New Field</button>
 
     <script>
-       //Moved to Main.js
        const dragarea = document.querySelector(".wraps");
        new Sortable(dragarea, {
         animation: 350
@@ -98,4 +97,4 @@ function dff_field_list_callback() {
     <?php
 }
 
-//removing shortcode from here -> goes to shortcode.php
+

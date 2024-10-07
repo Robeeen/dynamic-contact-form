@@ -22,10 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.addEventListener('click', function(e) {
-        if (e.target && e.target.className === 'remove-field btn btn-primary') {
+        if (e.target && e.target.className === 'remove-field btn btn-danger') {
             e.preventDefault();
             var row = e.target.closest('tr');
             row.remove();
         }
     });
 });
+
