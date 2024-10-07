@@ -53,6 +53,7 @@ function dff_register_settings() {
 function dff_field_list_callback() {
     $fields = get_option('dff_fields', []);
     ?>
+    <div class='jumbotron'>
     <table id="dynamic-field-list" class="table">
         <thead>
             <tr>
@@ -87,8 +88,9 @@ function dff_field_list_callback() {
             <?php endif; ?>
         </tbody>
     </table>
-    <button id="add-new-field" class="btn btn-success">Add New Field</button>
 
+    <button id="add-new-field" class="btn btn-success">Add New Field</button>
+ </div>               
     <script>
        const dragarea = document.querySelector(".wraps");
        new Sortable(dragarea, {

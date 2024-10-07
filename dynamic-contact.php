@@ -46,7 +46,7 @@ add_action( 'admin_enqueue_scripts', 'bootstrap_js');
 
 //Front-end bootstrap
 function bootstrap_js_front(){
-    wp_enqueue_script('prefix_bootstrap', path_js);
+    wp_enqueue_script('prefix_bootstrap', path_js, array('jquery'), NULL, true);
     wp_enqueue_style('prefix_bootstrap', path_css);
 }
 add_action( 'wp_enqueue_scripts', 'bootstrap_js_front');
