@@ -15,7 +15,7 @@ function dff_display_form() {
         <?php foreach ($fields as $field): ?>
             <p>
                 <label><?php echo esc_html($field['name']); ?></label>
-                <?php if ($field['type'] == 'text' || $field['type'] == 'email' || $field['type'] == 'number'): ?>
+                <?php if ($field['type'] == 'text' || $field['type'] == 'email' || $field['type'] == 'number' || $field['type'] == 'date'): ?>
                     <input type="<?php echo esc_attr($field['type']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="form-control" />
                 
                 <?php elseif ($field['type'] == 'radio'): ?>

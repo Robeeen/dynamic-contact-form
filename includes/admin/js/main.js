@@ -14,15 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="radio">Radio</option>
                     <option value="select">Dropdown</option>
                     <option value="checkbox">Checkbox</option>
+                    <option value="date">Date Field</option>
                 </select>
             </td>
             <td><input type="text" name="dff_fields[${rowCount}][options]" placeholder="Comma separated options" class="form-control"  /></td>
-            <td><button class="remove-field btn btn-primary">Remove</button></td>
+            <td><button id="remove-field" class="btn btn-danger">Remove</button></td>
         `;
     });
 
     document.addEventListener('click', function(e) {
-        if (e.target && e.target.className === 'remove-field btn btn-danger') {
+        if (e.target && e.target.id === 'remove-field') {
             e.preventDefault();
             var row = e.target.closest('tr');
             row.remove();

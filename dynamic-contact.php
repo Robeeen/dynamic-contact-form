@@ -39,7 +39,7 @@ define( 'sortable', '//cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.3/Sortable.m
 
 //For admin panel 
 function bootstrap_js(){
-    wp_enqueue_script('prefix_bootstrap', path_js);
+    wp_enqueue_script('prefix_bootstrap', path_js, array('jquery'), NULL, true);
     wp_enqueue_style('prefix_bootstrap', path_css);
 }
 add_action( 'admin_enqueue_scripts', 'bootstrap_js');
@@ -90,7 +90,7 @@ function dff_remove_custom_table(){
     $sql = "DROP TABLE IF EXISTS $table_name"; //delete tables from the db .
     $wpdb->query($sql);
     delete_option('dff_fields'); // remove all fields that saved previously.
-    $admin_email = get_option('admin_email');
-    wp_mail($admin_email, 'Plugin Deactivated', 'A plugin has been deactivated on your site.');
+    // $admin_email = get_option('admin_email');
+    // wp_mail($admin_email, 'Plugin Deactivated', 'A plugin has been deactivated on your site.');
 }
 

@@ -75,12 +75,13 @@ function dff_field_list_callback() {
                                 <option value="radio" <?php selected($field['type'], 'radio'); ?>>Radio</option>
                                 <option value="select" <?php selected($field['type'], 'select'); ?>>Dropdown</option>
                                 <option value="checkbox" <?Php selected($field['type'], 'checkbox'); ?>>Checkbox</option>
+                                <option value="date" <?Php selected($field['type'], 'date'); ?>>Date Field</option>
                             </select>
                         </td>
                         <td>
                             <input type="text" class="form-control" name="dff_fields[<?php echo $index; ?>][options]" value="<?php echo isset($field['options']) ? esc_attr($field['options']) : ''; ?>" placeholder="Comma separated options" />
                         </td>
-                        <td><button class="remove-field btn btn-danger">Remove</button></td>
+                        <td><button id="remove-field" class="btn btn-danger">Remove</button></td>
                     </tr>
                 <?php endforeach; ?>
             <?php endif; ?>
