@@ -85,8 +85,9 @@ function dff_remove_custom_table(){
     $table_name = $wpdb->prefix . 'dynamic_form_submissions'; // Table name with WordPress prefix
     $charset_collate = $wpdb->get_charset_collate();
 
-    $sql = "DROP TABLE IF EXISTS $table_name";
+    $sql = "DROP TABLE IF EXISTS $table_name"; //delete tables from the db .
     $wpdb->query($sql);
-    delete_option("dynamic-form-fields");
+    delete_option('dff_fields'); // remove all fields that saved previously.
+
 }
 
