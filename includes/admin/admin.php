@@ -16,7 +16,7 @@ function dff_create_menu() {
 function dff_settings_page() {
     ?>
     <div class="wrap">
-        <h1>Dynamic Form Fields</h1>
+        <h1><?php esc_html_e( 'Dynamic Form Fields' ); ?></h1>
         <form method="post" action="options.php">
             <?php
                 settings_fields('dff_settings_group');
@@ -57,10 +57,10 @@ function dff_field_list_callback() {
     <table id="dynamic-field-list" class="table">
         <thead>
             <tr>
-                <th>Field Name</th>
-                <th>Field Type</th>
-                <th>Options (for Radio/Select/Checkbox)</th>
-                <th>Actions</th>
+                <th><?php esc_html_e( 'Field Name' ); ?></th>
+                <th><?php esc_html_e( 'Field Type' ); ?></th>
+                <th><?php esc_html_e( 'Options (for Radio/Select/Checkbox)' ); ?></th>
+                <th><?php esc_html_e( 'Actions' ); ?></th>
             </tr>
         </thead>
         <tbody class="wraps">
@@ -76,7 +76,7 @@ function dff_field_list_callback() {
                                 <option value="radio" <?php selected($field['type'], 'radio'); ?>>Radio</option>
                                 <option value="select" <?php selected($field['type'], 'select'); ?>>Dropdown</option>
                                 <option value="checkbox" <?Php selected($field['type'], 'checkbox'); ?>>Checkbox</option>
-                                <option value="date" <?Php selected($field['type'], 'date'); ?>>Date Field</option>
+                                <option value="date" <?Php selected($field['type'], 'date'); ?>>Date</option>
                             </select>
                         </td>
                         <td>

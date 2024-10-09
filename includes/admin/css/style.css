@@ -16,8 +16,9 @@
     margin-left: 10px;
 }
 
-.wrap .submit{
-    margin-left: 20px;
+.wrap #submit{
+    margin-left: 20px; 
+    padding: 5px 10px !important;  
 }
 .wrap h1{
     margin-left: 20px;

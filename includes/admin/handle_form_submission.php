@@ -23,7 +23,10 @@ function dff_handle_form_submission() {
                 } elseif ($field['type'] === 'select') {
                     // Sanitize dropdown (select) field
                     $value = sanitize_text_field($value);
-                } else {
+                }  elseif ($field['type'] === 'date') {
+                    // Sanitize dropdown (date) field
+                    $value = date('Y/m/d', strtotime($value));
+                }  else {
                     // Sanitize all other fields as text
                     $value = sanitize_text_field($value);
                 }                
@@ -42,17 +45,23 @@ function dff_handle_form_submission() {
                         '%s'    // submission_date data type
                     )
                 ); 
+
+              
                 if ($result !== false) {
                     $submission_success = true;  // Mark submission as successful
+                   
                 }               
             }
         }
         if ($submission_success) {
             // Optional: Redirect to avoid re-submitting on refresh
+           
             wp_redirect(add_query_arg('form_submitted', 'true', $_SERVER['REQUEST_URI']));
             exit;
         }
-    }    
+    }  
+  
 }
 
-//var_dump($_POST);
+
+

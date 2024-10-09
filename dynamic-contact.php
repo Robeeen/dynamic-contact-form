@@ -35,6 +35,7 @@ include_once( DYNAMIC_PLUGIN . 'includes/admin/handle_form_submission.php');
 define( 'path_js', '//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js');
 define( 'path_css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 define( 'sortable', '//cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.3/Sortable.min.js');
+define( 'datepick', '//cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.1/dist/css/datepicker-bs5.min.css');
 
 
 //For admin panel 
@@ -48,6 +49,7 @@ add_action( 'admin_enqueue_scripts', 'bootstrap_js');
 function bootstrap_js_front(){
     wp_enqueue_script('prefix_bootstrap', path_js, array('jquery'), NULL, true);
     wp_enqueue_style('prefix_bootstrap', path_css);
+    wp_enqueue_style( 'datepick_bootstrap', datepick);
 }
 add_action( 'wp_enqueue_scripts', 'bootstrap_js_front');
 

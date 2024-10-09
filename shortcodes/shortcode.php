@@ -15,7 +15,11 @@ function dff_display_form() {
         <?php foreach ($fields as $field): ?>
             <p>
                 <label><?php echo esc_html($field['name']); ?></label>
-                <?php if ($field['type'] == 'text' || $field['type'] == 'email' || $field['type'] == 'number' || $field['type'] == 'date'): ?>
+                <?php if ($field['type'] == 'text' || $field['type'] == 'email' || $field['type'] == 'number'): ?>
+                    <input type="<?php echo esc_attr($field['type']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="form-control" />
+
+                
+                <?php elseif ($field['type'] == 'date'): ?>
                     <input type="<?php echo esc_attr($field['type']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="form-control" />
                 
                 <?php elseif ($field['type'] == 'radio'): ?>
@@ -54,6 +58,8 @@ function dff_display_form() {
     
     <?php   
     return ob_get_clean();
+    
 }
 
 add_action('init', 'dff_handle_form_submission');
+

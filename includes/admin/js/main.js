@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <option value="radio">Radio</option>
                     <option value="select">Dropdown</option>
                     <option value="checkbox">Checkbox</option>
-                    <option value="date">Date Field</option>
+                    <option value="date">Date</option>
                 </select>
             </td>
             <td><input type="text" name="dff_fields[${rowCount}][options]" placeholder="Comma separated options" class="form-control"  /></td>
