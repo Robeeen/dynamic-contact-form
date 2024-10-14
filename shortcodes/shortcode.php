@@ -16,7 +16,7 @@ function dff_display_form() {
             <p>
                 <label><?php echo esc_html($field['name']); ?></label>
                 <?php if ($field['type'] == 'text' || $field['type'] == 'email' || $field['type'] == 'number'): ?>
-                    <input type="<?php echo esc_attr($field['type']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="form-control" />
+                    <input type="<?php echo esc_attr($field['type']); ?>" name="<?php echo esc_attr($field['name']); ?>" class="form-control" autocomplete="off"/>
 
                 
                 <?php elseif ($field['type'] == 'date'): ?>

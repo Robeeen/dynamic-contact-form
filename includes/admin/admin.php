@@ -67,7 +67,7 @@ function dff_field_list_callback() {
             <?php if (!empty($fields)): ?>
                 <?php foreach ($fields as $index => $field): ?>
                     <tr>
-                        <td><input type="text" class="form-control" name="dff_fields[<?php echo $index; ?>][name]" value="<?php echo esc_attr($field['name']); ?>" /></td>
+                        <td><input type="text" class="form-control" name="dff_fields[<?php echo $index; ?>][name]" value="<?php echo esc_attr($field['name']); ?>" autocomplete="off"/></td>
                         <td>
                             <select name="dff_fields[<?php echo $index; ?>][type]" class="field-type-selector form-control">
                                 <option value="text" <?php selected($field['type'], 'text'); ?>>Text</option>
@@ -80,7 +80,7 @@ function dff_field_list_callback() {
                             </select>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="dff_fields[<?php echo $index; ?>][options]" value="<?php echo isset($field['options']) ? esc_attr($field['options']) : ''; ?>" placeholder="Comma separated options" />
+                            <input type="text" class="form-control" name="dff_fields[<?php echo $index; ?>][options]" value="<?php echo isset($field['options']) ? esc_attr($field['options']) : ''; ?>" placeholder="Comma separated options" autocomplete="off" />
                         </td>
                         <td><button id="remove-field" class="btn btn-danger">Remove</button></td>
                     </tr>

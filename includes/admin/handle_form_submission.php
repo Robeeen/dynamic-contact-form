@@ -46,7 +46,7 @@ function dff_handle_form_submission() {
                     )
                 ); 
 
-              
+                $submission_success = '';
                 if ($result !== false) {
                     $submission_success = true;  // Mark submission as successful
                    
